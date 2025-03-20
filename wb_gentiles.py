@@ -52,14 +52,20 @@ if __name__ == "__main__":
     
     esawc_fpath = gpaths["esawc"]
     etchm_fpath = gpaths["etchm"]
-    fbchm_fpath = gpaths["fbchm"]
+    
     egm08_fpath = gpaths["egm08"]
-    wsfbh_fpath = gpaths["wsfbh"]
+    
 
     cdem_wbm_fpath = gpaths["cdem_wbm"] 
     s1_fpath = gpaths["s1"]
     s2_fpath = gpaths["s2"]
     # why is gdtm and gdsm here 
+    fbchm_fpath = gpaths["fbchm"]
+    fbcha_fpath = gpaths["fbcha"]
+    lgeoid_fpath = gpaths["lgeoid"]
+    glow_fpath = gpaths["gedi_dtm"]
+    gtop_fpath = gpaths["gedi_dsm"]
+    wsfbh_fpath = gpaths["wsfbh"]
 
     num_processes = int(multiprocessing.cpu_count() * 0.75)
     pool = multiprocessing.Pool(processes=num_processes)
@@ -67,7 +73,8 @@ if __name__ == "__main__":
     vars = (tdem_dem_fpath,tdem_hem_fpath,tdem_wam_fpath,cdem_wbm_fpath,cdem_wbm_fpath,
             dtm_fpath,pdem_fpath,edem_egm_fpath,edem_wgs_fpath,edem_lcm_fpath,
             esawc_fpath,etchm_fpath,etchm_fpath,egm08_fpath,s1_fpath,s2_fpath,
-            tdem_com_fpath,fbchm_fpath)
+            tdem_com_fpath,fbchm_fpath,fbcha_fpath,glow_fpath,gtop_fpath,lgeoid_fpath,
+            wsfbh_fpath)
 
     for i, basefile in enumerate(basefiles):
         print(f"{i}/{len(basefiles)} @{basefile}")
@@ -76,7 +83,8 @@ if __name__ == "__main__":
                            tdem_dem_fpath, tdem_hem_fpath, tdem_wam_fpath, cdem_wbm_fpath,
                            dtm_fpath, pdem_fpath, edem_egm_fpath, edem_wgs_fpath,
                            edem_lcm_fpath, esawc_fpath, etchm_fpath, egm08_fpath,
-                           s1_fpath,s2_fpath,tdem_com_fpath,fbchm_fpath)
+                           s1_fpath,s2_fpath,tdem_com_fpath,fbchm_fpath,
+                           fbcha_fpath,glow_fpath,gtop_fpath,lgeoid_fpath,wsfbh_fpath)
         )
     pool.close()
     pool.join()

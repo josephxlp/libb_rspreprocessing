@@ -11,8 +11,8 @@ import numpy as np
 import os
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
-def scale_raster(input_raster, method="minmax"):
-    output_raster = input_raster.replace('.tif', 'X.tif')
+def scale_raster(input_raster, output_raster,method="minmax"):
+    #output_raster = input_raster.replace('.tif', 'X.tif')
     # Check if the output file already exists
     if os.path.exists(output_raster):
         print(f"File already exists: {output_raster}")
