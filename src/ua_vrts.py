@@ -1,4 +1,3 @@
-
 import os 
 import subprocess
 from glob import glob
@@ -80,16 +79,16 @@ def loadfiles_byvariable(archieve_dpath, outdir):
     ds["wsfbh"] = [f"{archieve_dpath}/WSF3D/data/WSFBH/WSF3D_V02_BuildingHeight.tif"]
     ds["pdem"] = [f"{archieve_dpath}/PBAND_DTM/RNG/NegroAOITDX08.tif"]
     ds["egm08"] = [f"{archieve_dpath}/GEOID/GLOBAL/us_nga_egm2008_1.tif"]
-    ds["fbchm"] = glob(f"{archieve_dpath}/FB_CHM/RESAMPLE/sorted_files/*/*.tif")
     ds["etchm"] = glob(f"{archieve_dpath}/ETH_CHM/data/*/*/*.tif")
     ds["esawc"] = glob(f"{archieve_dpath}/ESAWC/data/v200/2021/map_tiled/*/*.tif")
+    
 
     print_file_length(ds,"wsfbh")
     print_file_length(ds,"pdem")
     print_file_length(ds,"egm08")
     print_file_length(ds,"esawc") 
     print_file_length(ds,"etchm") 
-    print_file_length(ds,"fbchm") 
+     
 
     ds["gedi_dtm"] = [f"{archieve_dpath}/GEDI/GRID/comprexn/GEDI_L3_be/GEDI03_elev_lowestmode_mean_2019108_2022019_002_03_EPSG4326.tif"]
     ds["gedi_dsm"] = [f"{archieve_dpath}/GEDI/GRID/comprexn/GEDI_L3_vh/GEDI03_rh100_mean_2019108_2022019_002_03_EPSG4326.tif"]
@@ -107,8 +106,16 @@ def loadfiles_byvariable(archieve_dpath, outdir):
     print_file_length(ds,"s1")
     # glob(f"{archieve_dpath}/S1/comprexn/*/*.tif")[0]
 
+    ds["lgeoid"] = glob(f"{archieve_dpath}/GEOID/ROI/REPROJ/*.tif") # reproject this first to epsg 4326
+    print_file_length(ds,"lgeoid")
+
+    ds["fbchm"] = glob(f"{archieve_dpath}/FB_CHM/RESAMPLE/sorted_files/*/*maskednearest.tif") # only mekong for now
+    ds["fbcha"] = glob(f"{archieve_dpath}/FB_CHM/RESAMPLE/sorted_files/*/*nearest.tif")
+    print_file_length(ds,"fbchm")
+    print_file_length(ds,"fbcha")
+
     yaml_filename = join(outdir,"loadfiles_byvariable.yaml")
     save_yaml(data=ds, file_path=yaml_filename)
     tf = time.perf_counter() - ti 
-    print(f'loadfiles_byvariable @{tf/60} min(s)')
+    print(f"loadfiles_byvariable @{tf/60} min(s)")
     return ds, yaml_filename

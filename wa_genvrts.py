@@ -61,4 +61,4 @@ vars_txts_yaml = os.path.join(outdir, "vars_txts.yaml")
 save_yaml(data=d1, file_path=vars_vrts_yaml)
 save_yaml(data=d2, file_path=vars_txts_yaml)
 tf = time.perf_counter() - ti 
-print(f'loadfiles_byvariable @{tf/60} min(s)')
+print(f"loadfiles_byvariable @{tf/60} min(s)")
